@@ -23,7 +23,7 @@ case `uname` in
 Linux)
     while true; do
         time $stepfile
-        $stepfile files | xargs inotifywait -q -e modify $files
+        $stepfile files | xargs inotifywait -q -e modify
         [ $? -eq 130 ] && exit 130
         blue "[forever awakened `date +%H:%M:%S`]"
     done

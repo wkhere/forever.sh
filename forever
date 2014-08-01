@@ -11,7 +11,7 @@ err() {
 }
 
 blue() {
-    echo -e "\e[34m$1\e[0m" >&2
+    echo $'\e[34m'${1}$'\e[0m' >&2
 }
 
 stepfile="./forever.step"

@@ -10,15 +10,22 @@ err() {
     echo "$1" >&2; exit 1 
 }
 
+blue() {
+    echo -e "\e[34m$1\e[0m" >&2
+}
+
 stepfile="./forever.step"
 [ -x "$stepfile" ] || err "$stepfile should be present"
+
+export TIMEFORMAT='%2U user %2S system %P%% cpu %R total'
 
 case `uname` in
 Linux)
     while true; do
-        $stepfile
+        time $stepfile
         $stepfile files | xargs inotifywait -q -e modify $files
         [ $? -eq 130 ] && exit 130
+        blue "[forever awakened `date +%H:%M:%S`]"
     done
     ;;
 Darwin)

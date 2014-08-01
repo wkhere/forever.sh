@@ -25,6 +25,7 @@ export TIMEFORMAT='%2U user %2S system %P%% cpu %R total'
 
 case `uname` in
 Linux)
+    which inotifywait >/dev/null || err "you need 'inotifywait' command (apt-get install inotify-tools  or similar)"
     log started
     while true; do
         time $stepfile

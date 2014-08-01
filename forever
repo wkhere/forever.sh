@@ -34,6 +34,7 @@ Linux)
     done
     ;;
 Darwin)
+    which fswatch >/dev/null || err "you need 'fswatch' command (brew install fswatch)"
     log started
     time $stepfile
     $stepfile files | xargs fswatch -k -x | while read x; do

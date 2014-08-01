@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# (c) 2014 Wojciech Kaczmarek. All rights reserved.
+# Released under the BSD 2-clause license - see this for details:
+# http://github.com/herenowcoder/forever/blob/master/LICENSE
+
+# see http://superuser.com/a/781762/20912
+
+err() { 
+    echo "$1" >&2; exit 1 
+}
+
+stepfile="./forever.step"
+[ -x "$stepfile" ] || err "$stepfile should be present"
+
+case `uname` in
+Linux)
+    while true; do
+        $stepfile
+        $stepfile files | xargs inotifywait -q -e modify $files 
+    done
+    ;;
+Darwin)
+    err "TBD"
+    ;;
+FreeBSD)
+    err <<EOT
+If you want to have it on FreeBSD, Please give me (the author) an access
+to some FreeBSD box as I don't have one anymore. I can be contacted via Github
+issues.
+EOT
+    ;;
+esac

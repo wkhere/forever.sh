@@ -14,6 +14,10 @@ blue() {
     echo $'\e[34m'${1}$'\e[0m' >&2
 }
 
+log() {
+    blue "[forever $1 `date +%H:%M:%S`]"
+}
+
 stepfile="./forever.step"
 [ -x "$stepfile" ] || err "$stepfile should be present"
 
@@ -25,11 +29,17 @@ Linux)
         time $stepfile
         $stepfile files | xargs inotifywait -q -e modify
         [ $? -eq 130 ] && exit 130
-        blue "[forever awakened `date +%H:%M:%S`]"
+        log awakened
     done
     ;;
 Darwin)
-    err "TBD"
+    time $stepfile
+    $stepfile files | xargs fswatch -k -x | while read x; do
+        if [ `echo $x | grep -cE Attribute` -eq 0 ]; then
+            log awakened
+            time $stepfile
+        fi
+    done
     ;;
 FreeBSD)
     err <<EOT

@@ -44,10 +44,6 @@ Darwin)
     done
     ;;
 FreeBSD)
-    err <<EOT
-If you want to have it on FreeBSD, please give me (the author) an access
-to some FreeBSD box as I don't have one anymore. I can be contacted via Github
-issues.
-EOT
+    err $'FreeBSD not supported. Please donate access to a box with one.\nContact via Github Issues.'
     ;;
 esac

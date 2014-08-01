@@ -25,6 +25,7 @@ export TIMEFORMAT='%2U user %2S system %P%% cpu %R total'
 
 case `uname` in
 Linux)
+    log started
     while true; do
         time $stepfile
         $stepfile files | xargs inotifywait -q -e modify
@@ -33,6 +34,7 @@ Linux)
     done
     ;;
 Darwin)
+    log started
     time $stepfile
     $stepfile files | xargs fswatch -k -x | while read x; do
         if [ `echo $x | grep -cE Attribute` -eq 0 ]; then

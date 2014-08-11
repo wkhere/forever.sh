@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# script used by https://github.com/herenowcoder/forever tool
 
 if [ "$1" == files ]; then
     find lib test *.exs -type f -name '*.ex*' 

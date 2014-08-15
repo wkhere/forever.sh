@@ -41,7 +41,7 @@ Darwin)
     $stepfile files | xargs fswatch -k -x | while read x; do
         if [ `echo $x | grep -cE Attribute` -eq 0 ]; then
             log awakened
-            time $stepfile
+            time $stepfile $@
         fi
     done
     ;;

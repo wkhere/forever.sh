@@ -28,7 +28,7 @@ Linux)
     which inotifywait >/dev/null || err "you need 'inotifywait' command (apt-get install inotify-tools  or similar)"
     log started
     while true; do
-        time $stepfile
+        time $stepfile $@
         $stepfile files | xargs inotifywait -q -e modify
         [ $? -eq 130 ] && exit 130
         log awakened
@@ -37,7 +37,7 @@ Linux)
 Darwin)
     which fswatch >/dev/null || err "you need 'fswatch' command (brew install fswatch)"
     log started
-    time $stepfile
+    time $stepfile $@
     $stepfile files | xargs fswatch -k -x | while read x; do
         if [ `echo $x | grep -cE Attribute` -eq 0 ]; then
             log awakened

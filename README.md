@@ -59,7 +59,8 @@ You usually want to have the same or very similar `forever.step`
 for the same kind of language/application. Here's [example stepfile]
 (https://github.com/herenowcoder/forever/blob/master/examples/forever.step-elixir)
 for an [Elixir] project,
-running compilation & tests, plus regenerating [ctags] in background.
+running compilation & tests, optionally coverage, dialyze or docs,
+plus regenerating [ctags] in background.
 
 [Elixir]: http://elixir-lang.org
 [ctags]: http://ctags.sourceforge.net

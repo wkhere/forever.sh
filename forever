@@ -38,7 +38,7 @@ Darwin)
     which fswatch >/dev/null || err "you need 'fswatch' command (brew install fswatch)"
     log started
     time $stepfile $@
-    $stepfile files | xargs fswatch -k -x | while read x; do
+    $stepfile files | xargs fswatch -x | while read x; do
         if [ `echo $x | grep -cE Attribute` -eq 0 ]; then
             log awakened
             time $stepfile $@

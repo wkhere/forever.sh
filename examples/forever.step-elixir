@@ -33,4 +33,4 @@ if [[ $1 == test ]]; then
     echo -n "Running tests.. "; mix test $@
 fi
 
-wait # for ctags
+wait # for ctags background run

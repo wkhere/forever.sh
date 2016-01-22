@@ -15,7 +15,7 @@ fi
 [ -z "$1" ] && set -- "test"
 
 echo -n "Compiling dev.. "; time mix compile
-which ctags >/dev/null && ctags --languages=Elixir,Erlang -R $ctags_dirs &
+ctags --help >/dev/null 2>&1 && ctags --languages=Elixir,Erlang -R $ctags_dirs
 
 [[ $1 == doc* ]] && mix docs
 [[ $1 == dia* ]] && time nice mix dialyze --no-check  --error-handling --race-conditions --underspecs --unmatched-returns
@@ -32,5 +32,3 @@ if [[ $1 == test ]]; then
     shift
     echo -n "Running tests.. "; mix test $@
 fi
-
-wait # for ctags background run

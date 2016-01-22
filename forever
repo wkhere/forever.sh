@@ -6,6 +6,8 @@
 
 # see http://superuser.com/a/781762/20912
 
+stepfile="./.forever.step"
+
 err() { 
     echo "$1" >&2; exit 1 
 }
@@ -18,8 +20,53 @@ log() {
     blue "[forever $1 `date +%H:%M:%S`]"
 }
 
-stepfile="./forever.step"
-[ -x "$stepfile" ] || err "$stepfile should be present"
+discover_project() {
+    mix deps >/dev/null 2>&1
+    if [ $? -eq 0 ]; then echo "project_mix"; return 0; fi
+    return 1
+}
+
+project_mix() {
+    cat <<'EOT'
+#!/bin/bash -e
+# script used by https://github.com/herenowcoder/forever tool
+
+if [ "$1" == files ]; then
+    find lib test *.exs -type f -name '*.ex*'
+    exit
+fi
+
+[ -z "$1" ] && set -- "test"
+
+echo -n "Compiling dev.. "; time mix compile
+
+[[ $1 == doc* ]] && mix docs
+[[ $1 == dia* ]] && time nice mix dialyze --no-check  --error-handling --race-co
+if [[ $1 == cov* ]]; then
+    echo -n "Running coverage.. "
+    shift
+    if [ -z "$@" ]; then
+        MIX_ENV=test mix coveralls
+    else
+        MIX_ENV=test mix coveralls.detail $@
+    fi
+fi
+if [[ $1 == test ]]; then
+    shift
+    echo -n "Running tests.. "; mix test $@
+fi
+EOT
+}
+
+if [ ! -x "$stepfile" ]; then
+    echo -n "Discovering project type... "
+    guess=`discover_project`
+    [ $? -ne 0 ] && err "$stepfile not found and couldn't guess project type"
+    $guess > $stepfile
+    [ $? -ne 0 ] && err "couldn't find $guess function in my script"
+    chmod a+x $stepfile
+    echo "$guess. Created $stepfile."
+fi
 
 export TIMEFORMAT='%2U user %2S system %P%% cpu %R total'
 

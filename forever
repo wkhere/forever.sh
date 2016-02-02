@@ -40,6 +40,7 @@ fi
 
 echo -n "Compiling dev.. "; time mix compile
 
+[[ $1 == com* ]] && exit
 [[ $1 == doc* ]] && mix docs
 [[ $1 == dia* ]] && time nice mix dialyze --no-check  --error-handling --race-co
 if [[ $1 == cov* ]]; then

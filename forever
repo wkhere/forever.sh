@@ -85,7 +85,7 @@ if [ ! -x "$stepfile" ]; then
     echo "$guess. Created $stepfile."
 fi
 
-export TIMEFORMAT='%2U user %2S system %P%% cpu %R total'
+export TIMEFORMAT=$'\e[34m''[%2Us user  %2Ss sys  %P%% cpu  %Rs total]'$'\e[0m'
 
 case `uname` in
 Linux)

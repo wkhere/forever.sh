@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# (c) 2014-2016 Wojciech Kaczmarek. All rights reserved.
+# (c) 2014-2017 Wojciech Kaczmarek. All rights reserved.
 # Released under the BSD 2-clause license - see this for details:
 # http://github.com/herenowcoder/forever/blob/master/LICENSE
 
@@ -21,11 +21,26 @@ log() {
 }
 
 discover_project() {
+    if [ -r setup.py ]; then echo "project_py"; return 0; fi
 	echo *.go >/dev/null 2>&1
 	if [ $? -eq 0 ]; then echo "project_go"; return 0; fi
     mix deps >/dev/null 2>&1
     if [ $? -eq 0 ]; then echo "project_mix"; return 0; fi
     return 1
+}
+
+project_py() {
+cat <<'EOT'
+#!/bin/bash -e
+# script used by https://github.com/herenowcoder/forever tool
+
+if [ "$1" == files ]; then
+    find . -type f -name '*.py'
+    exit
+fi
+
+exec make $@
+EOT
 }
 
 project_go() {

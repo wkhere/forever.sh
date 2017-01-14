@@ -8,8 +8,8 @@
 
 stepfile="./.forever.step"
 
-err() { 
-    echo "$1" >&2; exit 1 
+err() {
+    echo "$1" >&2; exit 1
 }
 
 blue() {

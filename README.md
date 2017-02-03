@@ -45,20 +45,20 @@ if [ "$1" == files ]; then
     exit
 fi
 
-echo "FOO!" #... here you usually compile and/or run your tests
+echo "Hey!" #... here you usually compile and/or run your tests
 ```
 * remember to `chmod a+x .forever.step`
 * run it forever ;)
 ```shell
 % forever
 [forever started 14:27:25]
-FOO!
+Hey!
 0.00 user 0.00 system 85.13% cpu 0.003 total
 ```
 Now when you save files, it goes like:
 ```
 [forever awakened 14:45:53]
-FOO!
+Hey!
 0.00 user 0.00 system 95.09% cpu 0.004 total
 ```
 ..until you hit Ctrl-c.

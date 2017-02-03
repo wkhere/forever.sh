@@ -8,7 +8,7 @@ For Linux and OSX.
 Over years I wrote several mutations of a script which monitors source code changes
 and triggers some action when they changed. The last invention was [forever.py],
 aimed esp. towards writing RubyMotion code for iPhone on OSX.
-[forever.py]: http://github.com/herenowcoder/forever.py
+[forever.py]: http://github.com/wkhere/forever.py
 
 That was smart, but not working on Linux, where instead I used bunch of inotify-based
 scripts. Also, the adoption to different file layouts ended up as modifying the scripts
@@ -21,7 +21,7 @@ That's it.
 
 ### Installation
 ```shell
-% wget https://github.com/herenowcoder/forever/raw/master/forever -Oforever
+% wget https://github.com/wkhere/forever/raw/master/forever -Oforever
 % chmod a+x forever
 % ... put it in your PATH
 ```

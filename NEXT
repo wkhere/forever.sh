@@ -1,0 +1,4 @@
+This version of `forever` doesn't handle properly newly created files.
+
+Instead of inventing proper commandline switched for `inotify...`,
+consider rewriting in Go with supposedly portable http://fsnotify.org .

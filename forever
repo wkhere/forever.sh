@@ -22,8 +22,8 @@ log() {
 
 discover_project() {
     if [ -r setup.py ]; then echo "project_py"; return 0; fi
-	echo *.go >/dev/null 2>&1
-	if [ $? -eq 0 ]; then echo "project_go"; return 0; fi
+    echo *.go >/dev/null 2>&1
+    if [ $? -eq 0 ]; then echo "project_go"; return 0; fi
     mix deps >/dev/null 2>&1
     if [ $? -eq 0 ]; then echo "project_mix"; return 0; fi
     return 1
@@ -49,8 +49,8 @@ cat <<'EOT'
 # script used by https://github.com/wkhere/forever tool
 
 if [ "$1" == files ]; then
-	find . -type f -name '*.go'
-	exit
+    find . -type f -name '*.go'
+    exit
 fi
 
 exec make $@

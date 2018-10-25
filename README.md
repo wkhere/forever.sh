@@ -9,7 +9,7 @@ You define the list of files by printing it out when running `./.forever.step fi
 
 ### Installation
 ```shell
-% wget https://github.com/wkhere/forever.sh/raw/master/forever.sh -Oforever.sh
+% curl -OL https://github.com/wkhere/forever.sh/raw/master/forever.sh
 % chmod a+x forever.sh
 % ... put it in your PATH
 ```

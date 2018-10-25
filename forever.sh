@@ -2,7 +2,7 @@
 #
 # (c) 2014-2017 Wojciech Kaczmarek. All rights reserved.
 # Released under the BSD 2-clause license - see this for details:
-# http://github.com/wkhere/forever/blob/master/LICENSE
+# http://github.com/wkhere/forever.sh/blob/master/LICENSE
 
 # see http://superuser.com/a/781762/20912
 
@@ -17,7 +17,7 @@ blue() {
 }
 
 log() {
-    blue "[forever $1 `date +%H:%M:%S`]"
+    blue "[forever.sh $1 `date +%H:%M:%S`]"
 }
 
 discover_project() {
@@ -32,7 +32,7 @@ discover_project() {
 project_py() {
 cat <<'EOT'
 #!/bin/bash -e
-# script used by https://github.com/wkhere/forever tool
+# script used by https://github.com/wkhere/forever.sh tool
 
 if [ "$1" == files ]; then
     find . -type f -name '*.py'
@@ -46,7 +46,7 @@ EOT
 project_go() {
 cat <<'EOT'
 #!/bin/bash -e
-# script used by https://github.com/wkhere/forever tool
+# script used by https://github.com/wkhere/forever.sh tool
 
 if [ "$1" == files ]; then
     find . -type f -name '*.go'
@@ -60,7 +60,7 @@ EOT
 project_mix() {
     cat <<'EOT'
 #!/bin/bash -e
-# script used by https://github.com/wkhere/forever tool
+# script used by https://github.com/wkhere/forever.sh tool
 
 if [ "$1" == files ]; then
     find lib test *.exs -type f -name '*.ex*'

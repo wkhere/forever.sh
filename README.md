@@ -1,5 +1,7 @@
 ## forever.sh
 
+**NOTE** this is superseded by https://github.com/wkhere/forever
+
 A simplified "run my stuff when source code changes" tool.
 For Linux and OSX.
 
